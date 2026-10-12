@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#15122A">
+  <title>To my moon</title>
+  <meta name="description" content="Good morning, meri jaan.">
+  <meta property="og:title" content="To my moon">
+  <meta property="og:description" content="Good morning, meri jaan.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&family=Pinyon+Script&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+
+  <main class="app">
+
+
+    <!-- ============ Screen 1 · Tap the moon ============ -->
+    <section class="screen screen--landing active" data-screen="moon" aria-labelledby="h0">
+      <div class="screen__body">
+        <header class="intro">
+          <p class="label label--vert">For Suh, from Majou</p>
+          <h1 class="title-xl" id="h0" tabindex="-1" data-focus>Good morning,<br>meri jaan</h1>
+        </header>
+
+        <div class="stage">
+          <button class="moon-btn" id="moonBtn" type="button" aria-label="Tap the moon">
+            <span class="halo halo--lg">
+              <span class="moon breathe"></span>
+            </span>
+          </button>
+        </div>
+
+        <p class="moon-caption">Tap the moon.<br>I left something up here for you.</p>
+        <p class="hint">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+          Turn your sound on
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Screen 2 · Voice note ============ -->
+    <section class="screen" data-screen="voice" data-title="Voice note" aria-labelledby="h1" aria-hidden="true" inert>
+      <div class="topbar"><span class="topbar__name">01 · Voice note</span><span class="topbar__count">1 / 4</span></div>
+      <div class="screen__body">
+        <h2 class="title" id="h1" tabindex="-1" data-focus>The first voice<br>you hear today</h2>
+        <p class="sub">Recorded at night in Canada, waiting for you when you wake up in Mauritius.</p>
+
+        <div class="stage">
+          <button class="moon-player" id="voiceBtn" type="button" aria-label="Play voice note">
+            <span class="halo halo--md">
+              <span class="moon">
+                <span class="moon-player__icon">
+                  <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5Z"/></svg>
+                  <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13M15.5 5.5v13"/></svg>
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <p class="label label--vert listen-hint" id="voiceHint" aria-hidden="true">Tap the moon to listen</p>
+
+        <div class="wave" id="wave" role="slider" tabindex="0" aria-label="Voice note position"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00"></div>
+        <p class="times" id="voiceTime">0:00 / 0:00</p>
+        <p class="audio-error" id="voiceErr" hidden>The voice note couldn't load.</p>
+      </div>
+
+      <nav class="bottom">
+        <button class="btn-round" type="button" data-go="moon" aria-label="Back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="btn btn--primary" type="button" data-go="song" id="voiceNext">
+          <span class="btn__label">I sang something for you</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </nav>
+      <audio id="voiceAudio" src="audio/background_mix.mp3" preload="none" playsinline></audio>
+    </section>
+
+    <!-- ============ Screen 3 · A song for you ============ -->
+    <section class="screen" data-screen="song" data-title="A song" aria-labelledby="h2" aria-hidden="true" inert>
+      <div class="topbar"><span class="topbar__name">02 · A song</span><span class="topbar__count">2 / 4</span></div>
+      <div class="screen__body">
+        <div class="stage">
+          <div class="record" id="record" aria-hidden="true">
+            <span class="record__ring"></span>
+            <span class="record__ring"></span>
+            <span class="record__ring"></span>
+            <span class="moon record__label"><span class="record__hole"></span></span>
+          </div>
+        </div>
+
+        <div class="song-text">
+          <p class="label label--vert">Your favourite, in my voice</p>
+          <!-- ✏️ Put the song title here -->
+          <h2 class="title title--song" id="h2" tabindex="-1" data-focus>[Song title]</h2>
+          <p class="sub">Sung by your Majou, off-key and all</p>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress" id="songProgress" role="slider" tabindex="0" aria-label="Song position"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+            <span class="progress__track"><span class="progress__fill" id="songFill"></span></span>
+          </div>
+          <div class="times times--split"><span id="songCur">0:00</span><span id="songDur">0:00</span></div>
+        </div>
+
+        <div class="song-controls">
+          <button class="play-btn play-btn--pink" id="songBtn" type="button" aria-label="Play song">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5Z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13M15.5 5.5v13"/></svg>
+          </button>
+        </div>
+        <p class="audio-error" id="songErr" hidden>The song couldn't load.</p>
+      </div>
+
+      <nav class="bottom">
+        <button class="btn-round" type="button" data-go="voice" aria-label="Back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="btn btn--outline" type="button" data-go="stars">
+          Catch a star
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </nav>
+      <audio id="songAudio" src="audio/song.mp3" preload="none" playsinline></audio>
+    </section>
+
+    <!-- ============ Screen 4 · Catch a star ============ -->
+    <section class="screen" data-screen="stars" data-title="Stars" aria-labelledby="h3" aria-hidden="true" inert>
+      <div class="topbar"><span class="topbar__name">03 · Stars</span><span class="topbar__count">3 / 4</span></div>
+      <div class="screen__body screen__body--stars">
+        <h2 class="title" id="h3" tabindex="-1" data-focus>Every star is a reason<br>I love you</h2>
+        <p class="sub" id="starSub">Tap them all. <span id="caughtCount">0</span> of 7 caught.</p>
+
+        <div class="star-sky" id="starSky"></div>
+
+        <div class="reason-card" id="reasonCard" aria-live="polite">
+          <p class="label label--rose" id="reasonNum">A star is waiting</p>
+          <p class="reason-card__text" id="reasonText">Tap any star to read why.</p>
+        </div>
+      </div>
+
+      <nav class="bottom">
+        <button class="btn-round" type="button" data-go="song" id="starsBack" aria-label="Back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="btn btn--primary" type="button" data-go="letter">
+          One last thing
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </nav>
+    </section>
+
+    <!-- ============ Screen 5 · The letter ============ -->
+    <section class="screen" data-screen="letter" data-title="The letter" aria-labelledby="h4" aria-hidden="true" inert>
+      <div class="topbar"><span class="topbar__name">04 · The letter</span><span class="topbar__count">4 / 4</span></div>
+      <div class="screen__body screen__body--letter">
+
+        <!-- State A: sealed -->
+        <div class="sealed" id="sealed">
+          <div class="envelope">
+            <span class="env-back"></span>
+            <span class="env-paper"><span></span><span></span><span></span></span>
+            <span class="env-front"></span>
+            <span class="env-flap"></span>
+            <span class="seal">
+              <svg class="seal__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.3 6.3 0 0 0 9.6 9.6Z"/></svg>
+              <svg class="seal__crack" viewBox="0 0 52 52" aria-hidden="true"><path d="M27 3 23 15l7 8-6 10 4 7-3 9"/></svg>
+            </span>
+          </div>
+          <h2 class="sealed__text" id="h4" tabindex="-1" data-focus>Sealed with the moon,<br>just for you</h2>
+          <button class="btn btn--outline" id="breakSeal" type="button">Break the seal</button>
+        </div>
+
+        <!-- State B: open letter -->
+        <article class="letter" id="letter" hidden>
+          <div class="letter__inner" tabindex="0" aria-labelledby="letterTitle">
+            <svg class="sprig sprig--top" viewBox="0 0 60 80" aria-hidden="true"><use href="#sprig"/></svg>
+            <div class="phases" id="phases" aria-hidden="true"></div>
+            <h3 class="letter__title" id="letterTitle" tabindex="-1">To my moon</h3>
+            <p class="letter__greeting reveal" style="--i:0">Meri jaan,</p>
+            <p class="reveal" style="--i:1">I wanted the first thing you saw today to be something from me, even from the other side of the world.</p>
+            <p class="reveal" style="--i:2">Before you, I never paid much attention to the moon. Now I look for it every night. Some nights it’s full and bright, some nights it’s only a thin silver line, and some nights I can’t see it at all. But I know it’s always there. That’s how I love you: on the loud days and the quiet ones, when you’re happy, when you’re quiet, when you’re silly and when you have no words left. I love every version of you.</p>
+            <p class="reveal" style="--i:3">I hope you know how strong you are. You carry so much with so much grace, you never give up, and you still find a way to be kind to everyone around you. I admire you more than I can ever say, and I am so proud of the woman you are. I’m not going anywhere, Insha Allah. And if I have ever hurt you, I am truly sorry. Please always tell me, because your heart matters to me more than anything. I will always listen, and I will always choose you.</p>
+            <p class="reveal" style="--i:4">Your voice late at night is the softest part of my day. I keep wishing I could be there in person, to bring you flowers, to hold your hand, to watch the moon rise with you instead of on a screen. Every day that passes brings December a little closer, and I count every one of them.</p>
+            <p class="reveal" style="--i:5">Every night I make dua for us. I ask Allah to bless what we are building and to make our love a source of peace and joy. I ask Him to give us patience through the distance and the waiting, and strength whenever we are tested, so that every test brings us even closer. And I ask Him to write us a future together: one home, flowers on the table, and the moon outside our window. <em class="letter__dua">Rabbana afrigh ‘alayna sabran.</em> Our Lord, pour patience upon us. Ameen.</p>
+            <p class="reveal" style="--i:6">Until then, look up tonight. The moon you love is the same one I’m looking at. Wherever you are, we’re under the same sky, and my heart is right there with you.</p>
+            <p class="reveal" style="--i:7">And for today: I hope your Monday is gentle with you. May everything you do feel a little lighter, may something make you laugh out loud, and may you smile at least once and think of me. Go have a beautiful day, meri jaan. I’ll be right here when it’s done.</p>
+            <div class="signoff reveal" style="--i:8">
+              <svg class="sprig sprig--bottom" viewBox="0 0 60 80" aria-hidden="true"><use href="#sprig"/></svg>
+              <div class="signoff__text">
+                <p class="signoff__line">Forever yours,</p>
+                <p class="signoff__name">Majou</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <nav class="bottom">
+        <button class="btn-round" type="button" data-go="stars" aria-label="Back">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="btn btn--primary" id="backToMoon" type="button" data-go="moon" hidden>
+          <svg class="i-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.3 6.3 0 0 0 9.6 9.6Z"/></svg>
+          Back to the moon
+        </button>
+      </nav>
+    </section>
+  </main>
+
+  <!-- Shared pressed-flower sprig -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="sprig" viewBox="0 0 60 80">
+      <path d="M30 78C29 62 31 44 34 27" fill="none" stroke="#6FA08C" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M30.5 68C38 66 42 61 43 56c-6 1-11 6-12.5 12Z" fill="#B9DCCB" stroke="#8DB8A5" stroke-width=".6"/>
+      <path d="M31 57c-9-3-13-9-14-15 7 2 12 8 14 15Z" fill="#B9DCCB" stroke="#8DB8A5" stroke-width=".6"/>
+      <path d="M32.5 44c7.5-3 11.5-8 12.5-14-7 2-11 7-12.5 14Z" fill="#B9DCCB" stroke="#8DB8A5" stroke-width=".6"/>
+      <g transform="translate(34 21)">
+        <ellipse cy="-6" rx="4.4" ry="7" fill="#E9C6BA" stroke="#C98E80" stroke-width=".5"/>
+        <ellipse cy="-6" rx="4.4" ry="7" fill="#E9C6BA" stroke="#C98E80" stroke-width=".5" transform="rotate(120)"/>
+        <ellipse cy="-6" rx="4.4" ry="7" fill="#E9C6BA" stroke="#C98E80" stroke-width=".5" transform="rotate(240)"/>
+        <circle r="2.6" fill="#C98E80"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>
